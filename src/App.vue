@@ -1,10 +1,12 @@
 <template>
-  <div id="app">
+  <div id="app" class="container-fluid">
     <display-table/>
   </div>
 </template>
 
 <script>
+import '@/assets/css/bootstrap/bootstrap.scss';
+
 import DisplayTable from './components/Table';
 
 export default {
