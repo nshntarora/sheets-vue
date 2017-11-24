@@ -3,11 +3,10 @@
       <div class="table-row row">
         <div class="table-column col-3"
           v-for="(col,index) in data.data"
-          :key="index">
-          <span :style="classObject(index)">
+          :key="index"
+          :style="classObject(index)">
           <i :class="iconClass" v-if="data.children && data.children.length && index===0" @click="toggle"></i>
           &nbsp;&nbsp;{{col}}
-          </span>
         </div>
       </div>
       <trow
