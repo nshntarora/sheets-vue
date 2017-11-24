@@ -4,7 +4,7 @@
         <div class="table-column col-3"
           v-for="(col,index) in data.data"
           :key="index">
-          <span v-for="rule in addedRules" :style="classObject(rule, index)">
+          <span :style="classObject(index)">
           <i :class="iconClass" v-if="data.children && data.children.length && index===0" @click="toggle"></i>
           &nbsp;&nbsp;{{col}}
           </span>
@@ -34,6 +34,13 @@ export default {
             backgroundColor: '#fc0',
           },
         },
+        {
+          regex: 'string',
+          column: 1,
+          formatting: {
+            backgroundColor: '#fcc',
+          },
+        },
       ],
     };
   },
@@ -50,15 +57,16 @@ export default {
     toggle() {
       this.open = !this.open;
     },
-    classObject(rule, index) {
-      if (rule.column === index) {
-        return {
-          backgroundColor: rule.formatting.backgroundColor,
-          padding: '12px',
-        };
+    classObject(index) {
+      for (let i = 0, len = this.addedRules.length; i < len; i += 1) {
+        if (this.addedRules[i].column === index) {
+          return {
+            backgroundColor: this.addedRules[i].formatting.backgroundColor,
+            padding: '12px',
+          };
+        }
       }
-      return {
-      };
+      return {};
     },
   },
 };
