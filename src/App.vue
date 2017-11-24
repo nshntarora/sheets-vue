@@ -6,6 +6,7 @@
 
 <script>
 import '@/assets/css/bootstrap/bootstrap.scss';
+import '@/assets/css/fontawesome/font-awesome.scss';
 
 import DisplayTable from './components/Table';
 

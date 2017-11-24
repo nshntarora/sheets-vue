@@ -1,11 +1,11 @@
 <template>
     <div class="table-body">
       <div class="table-row row">
-        <i class="fa fa-plus" v-if="data.children && data.children.length" @click="toggle">i</i>
         <div class="table-column col-3"
           v-for="(col,index) in data.data"
           :key="index">
-            {{col}}
+          <i :class="iconClass" v-if="data.children && data.children.length && index===0" @click="toggle"></i>
+          &nbsp;&nbsp;{{col}}
         </div>
       </div>
       <trow
@@ -26,6 +26,15 @@ export default {
       open: false,
     };
   },
+  computed: {
+    iconClass() {
+      return {
+        'fa pointer': true,
+        'fa-plus': !this.open,
+        'fa-minus': this.open,
+      };
+    },
+  },
   methods: {
     toggle() {
       this.open = !this.open;
@@ -33,3 +42,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.fa {
+  border: 1px solid #ccc;
+  padding: 1px;
+}
+</style>
