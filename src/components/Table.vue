@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Sheets</h1>
+    <div class="container">
     <table class="table table-hover">
       <div class="thead">
         <div class="table-row row">
@@ -14,7 +15,7 @@
         </trow>
       </div>
     </table>
-
+    </div>
   </div>
 </template>
 
