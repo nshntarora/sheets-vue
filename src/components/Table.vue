@@ -2,18 +2,19 @@
   <div>
     <h1>Sheets</h1>
     <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col" v-for="(heading,index) in table.headings" :key="index">
+      <div class="thead">
+        <div class="table-row row">
+          <div class="table-heading col-3" scope="col" v-for="(heading,index) in table.headings" :key="index">
             {{heading}}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <trow v-for="(row, index) in table.rows" :key="index" :data="row">
+          </div>
+        </div>
+      </div>
+      <div>
+        <trow :data="row" v-for="(row, index) in table.rows" :key="index" >
         </trow>
-      </tbody>
+      </div>
     </table>
+
   </div>
 </template>
 
