@@ -11,7 +11,7 @@
         </div>
       </div>
       <div>
-        <trow :data="row" v-for="(row, index) in table.rows" :key="index" >
+        <trow :data="row" v-for="(row, index) in table.rows" :key="index">
         </trow>
       </div>
     </table>
