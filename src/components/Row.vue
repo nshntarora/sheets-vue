@@ -1,7 +1,7 @@
 <template>
     <div class="table-body">
       <div class="table-row row">
-        <i class="fa fa-plus" v-if="data.children && data.children.length && !open">i</i>
+        <i class="fa fa-plus" v-if="data.children && data.children.length" @click="toggle">i</i>
         <div class="table-column col-3"
           v-for="(col,index) in data.data"
           :key="index">
@@ -25,6 +25,11 @@ export default {
     return {
       open: false,
     };
+  },
+  methods: {
+    toggle() {
+      this.open = !this.open;
+    },
   },
 };
 </script>
