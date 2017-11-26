@@ -11,7 +11,7 @@
         </div>
       </div>
       <div>
-        <trow :data="row" v-for="(row, index) in table.rows" :key="index">
+        <trow :data="row" v-for="(row, index) in table.rows" :key="index" :rules="rules">
         </trow>
       </div>
     </table>
@@ -31,6 +31,9 @@ export default {
   props: {
     table: {
       type: Object,
+    },
+    rules: {
+      type: Array,
     },
   },
   methods: {

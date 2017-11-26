@@ -2,10 +2,10 @@
   <div id="app" class="container-fluid">
     <div class="row">
       <div class="col-sm-12 col-md-8">
-        <display-table :table="table"/>
+        <display-table :table="table" :rules="rules"/>
       </div>
       <div class="col-sm-12 col-md-4">
-        <rule-builder/>
+        <rule-builder :rules="rules" :columns="table.headings" @addRule="addRule"/>
       </div>
     </div>
   </div>
@@ -44,11 +44,34 @@ export default {
           },
         ],
       },
+      rules: [
+        {
+          id: 1,
+          regex: 'string',
+          column: 2,
+          formatting: {
+            backgroundColor: '#fc0',
+          },
+        },
+        {
+          id: 2,
+          regex: 'string',
+          column: 1,
+          formatting: {
+            backgroundColor: '#fcc',
+          },
+        },
+      ],
     };
   },
   components: {
     DisplayTable,
     RuleBuilder,
+  },
+  methods: {
+    addRule(rule) {
+      this.rules.push(Object.assign({ id: this.rules.length + 1 }, rule));
+    },
   },
 };
 </script>

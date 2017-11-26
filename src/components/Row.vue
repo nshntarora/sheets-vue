@@ -13,7 +13,8 @@
         v-if="data.children && data.children.length && open"
         v-for="(child, index) in data.children"
         :key="index"
-        :data="child">
+        :data="child"
+        :rules="rules">
       </trow>
     </div>
 </template>
@@ -21,26 +22,10 @@
 <script>
 export default {
   name: 'trow',
-  props: ['data'],
+  props: ['data', 'rules'],
   data() {
     return {
       open: false,
-      addedRules: [
-        {
-          regex: 'string',
-          column: 2,
-          formatting: {
-            backgroundColor: '#fc0',
-          },
-        },
-        {
-          regex: 'string',
-          column: 1,
-          formatting: {
-            backgroundColor: '#fcc',
-          },
-        },
-      ],
     };
   },
   computed: {
@@ -57,10 +42,10 @@ export default {
       this.open = !this.open;
     },
     classObject(index, col) {
-      for (let i = 0, len = this.addedRules.length; i < len; i += 1) {
-        if ((this.addedRules[i].column === index) && col) {
+      for (let i = 0, len = this.rules.length; i < len; i += 1) {
+        if ((this.rules[i].column === index) && col) {
           return {
-            backgroundColor: this.addedRules[i].formatting.backgroundColor,
+            backgroundColor: this.rules[i].formatting.backgroundColor,
           };
         }
       }
