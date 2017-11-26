@@ -1,20 +1,24 @@
 <template>
-  <div>
-    <h1>Sheets</h1>
-    <div class="container">
-    <table class="table table-hover">
-      <div class="thead">
-        <div class="table-row row">
-          <div class="table-heading col-3" scope="col" v-for="(heading,index) in table.headings" :key="index">
-            {{heading}}
+  <div class="card">
+    <div class="card-header">
+      Sheet
+    </div>
+    <div class="card-body">
+      <div class="container">
+      <table class="table table-hover">
+        <div class="thead">
+          <div class="table-row row">
+            <div class="table-heading col-3" scope="col" v-for="(heading,index) in table.headings" :key="index">
+              {{heading}}
+            </div>
           </div>
         </div>
+        <div>
+          <trow :data="row" v-for="(row, index) in table.rows" :key="index" :rules="rules">
+          </trow>
+        </div>
+      </table>
       </div>
-      <div>
-        <trow :data="row" v-for="(row, index) in table.rows" :key="index" :rules="rules">
-        </trow>
-      </div>
-    </table>
     </div>
   </div>
 </template>

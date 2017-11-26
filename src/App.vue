@@ -1,6 +1,9 @@
 <template>
-  <div id="app" class="container-fluid">
-    <div class="row">
+  <div id="app" class="container-fluid mt-3">
+    <div class="logo">
+      Sheets
+    </div>
+    <div class="row mt-3">
       <div class="col-sm-12 col-md-8">
         <display-table :table="table" :rules="rules"/>
       </div>
