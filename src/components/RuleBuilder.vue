@@ -4,7 +4,7 @@
             Rule Builder
           </div>
     <div class="card-body">
-      <rule-list :rules="rules" :columns="columns"/>
+      <rule-list :rules="rules" :columns="columns" @deleteRule="deleteRule"/>
       <div class="card mt-3">
         <div class="card-header">
           Add Rule

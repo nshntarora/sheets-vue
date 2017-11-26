@@ -16,5 +16,10 @@ export default {
     rules: Array,
     columns: Array,
   },
+  methods: {
+    deleteRule(ruleId) {
+      this.$emit('deleteRule', ruleId);
+    },
+  },
 };
 </script>
