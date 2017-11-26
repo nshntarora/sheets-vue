@@ -43,9 +43,7 @@ export default {
     },
     classObject(index, col) {
       for (let i = 0, len = this.rules.length; i < len; i += 1) {
-        // console.log('testing rule ', i);
         if ((this.rules[i].column === index)) {
-          // console.log('validation result', this.validate(this.rules[i], col));
           if (this.validate(this.rules[i], col)) {
             return {
               backgroundColor: this.rules[i].formatting.backgroundColor,
@@ -61,8 +59,6 @@ export default {
       }
       const condition = Object.keys(rule.numberCriteria)[0];
       const number = rule.numberCriteria[condition];
-
-      // console.log('testing ', value, ' condition and number', condition, number);
 
       switch (condition) {
         case 'greaterThan': return (value > number);
