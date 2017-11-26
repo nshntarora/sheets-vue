@@ -29,6 +29,7 @@
             Regex
             <input class="form-control" placeholder="/A/" type="text" v-model="regex">
           </label>
+
           <label v-else class="mt-2">
             Number Criteria
             <div class="row">
@@ -46,17 +47,20 @@
               </div>
             </div>
           </label><br/>
+
           <label class="mt-2">
             Column
             <select v-model="rule.column" class="form-control">
               <option v-for="(column, index) in columns" :key="index" :value="index">{{ column }}</option>
             </select>
           </label><br/>
+
           <label class="mt-2">
             Background Color
             <input type="text" placeholder="#ffcc00" v-model="rule.formatting.backgroundColor" class="form-control">
             <p class="text-muted">Please enter the hex code of the background color</p>
           </label><br/>
+
           <button class="btn btn-primary pointer btn-lg btn-block mt-2" @click.prevent.stop="createRule">Create Rule</button>
         </div>
       </div>
@@ -84,6 +88,9 @@ export default {
     };
   },
   methods: {
+    /**
+     * Toggles rule mode. Regex or Number.
+     */
     toggleRule(toggleTo) {
       if (toggleTo === 'number') {
         this.regexRule = false;
@@ -93,12 +100,21 @@ export default {
         this.regexRule = !this.regexRule;
       }
     },
+    /**
+     * Displays the form incomplete error
+     */
     showIncompleteError() {
       this.formError = 'I guess you missed something';
     },
+    /**
+     * Hides the form incomplete error
+     */
     hideIncompleteError() {
       this.formError = '';
     },
+    /**
+     * Checks the type of rule and calls its respecitve creation function
+     */
     createRule() {
       if (this.regexRule) {
         this.createRegexRule();
@@ -106,6 +122,9 @@ export default {
         this.createNumberRule();
       }
     },
+    /**
+     * Creates the regular expression and calls the add function
+     */
     createRegexRule() {
       if (this.regex && this.regex.length) {
         const regex = new RegExp(this.regex);
@@ -114,6 +133,9 @@ export default {
         this.showIncompleteError();
       }
     },
+    /**
+     * Creates the numberCriteria object and calls the add function
+     */
     createNumberRule() {
       if (this.numberCriteria && this.number !== '') {
         const numberCriteria = this.numberCriteria;
@@ -133,6 +155,9 @@ export default {
         this.showIncompleteError();
       }
     },
+    /**
+     * Adds column and formatting info and emits the addRule event
+     */
     addRule(ruleWithCriteria) {
       if ((this.rule.column >= 0) &&
       (this.rule.formatting.backgroundColor && this.rule.formatting.backgroundColor.length > 0)) {

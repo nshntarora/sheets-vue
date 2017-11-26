@@ -38,9 +38,15 @@ export default {
     },
   },
   methods: {
+    /**
+     * Toggles the current row state. Expanded or collapsed.
+     */
     toggle() {
       this.open = !this.open;
     },
+    /**
+     * Returns Styles object for a cell based on its rule's formatting options
+     */
     classObject(index, col) {
       for (let i = 0, len = this.rules.length; i < len; i += 1) {
         if ((this.rules[i].column === index)) {
@@ -53,11 +59,17 @@ export default {
       }
       return {};
     },
+    /**
+     * Validates if the passed value satisfies the passed rule.
+     */
     validate(rule, value) {
       if (rule.regex) {
         return rule.regex.test(value);
       }
+
+      // Fetch the first key from numberCriteria in rule object
       const condition = Object.keys(rule.numberCriteria)[0];
+
       const number = rule.numberCriteria[condition];
 
       switch (condition) {

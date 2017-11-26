@@ -1,8 +1,8 @@
 <template>
   <div class="card">
     <div class="card-header">
-            Rule Builder
-          </div>
+      Rule Builder
+    </div>
     <div class="card-body">
       <rule-list :rules="rules" :columns="columns" @deleteRule="deleteRule"/>
       <rule-form :columns="columns" @addRule="addRule"/>

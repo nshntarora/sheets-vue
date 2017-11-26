@@ -40,25 +40,5 @@ export default {
       type: Array,
     },
   },
-  methods: {
-    isArray(row) {
-      if (row instanceof Array) {
-        return true;
-      }
-      return false;
-    },
-    isJSONObject(row) {
-      if (row instanceof Object) {
-        return true;
-      }
-      return false;
-    },
-    hasChildren(row) {
-      if (row.children && row.children.length > 0) {
-        return true;
-      }
-      return false;
-    },
-  },
 };
 </script>
