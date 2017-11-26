@@ -28,32 +28,10 @@ export default {
   components: {
     trow,
   },
-  data() {
-    return {
-      msg: 'Sheets',
-      table: {
-        headings: ['Name', 'Roll Number', 'Marks'],
-        rows: [
-          {
-            data: ['Shivam', 123, 22],
-          },
-          {
-            data: ['Arora', 123, 22],
-            children: [
-              { data: ['Nishant', 1417424, 59] },
-              {
-                data: ['Arora', 1417425, 69],
-                children: [
-                  {
-                    data: ['Shivam', 123, 22],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    };
+  props: {
+    table: {
+      type: Object,
+    },
   },
   methods: {
     isArray(row) {

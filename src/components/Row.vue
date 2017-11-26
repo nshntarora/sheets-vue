@@ -4,7 +4,7 @@
         <div class="table-column col-3"
           v-for="(col,index) in data.data"
           :key="index"
-          :style="classObject(index)">
+          :style="classObject(index, col)">
           <i :class="iconClass" v-if="data.children && data.children.length && index===0" @click="toggle"></i>
           &nbsp;&nbsp;{{col}}
         </div>
@@ -56,12 +56,11 @@ export default {
     toggle() {
       this.open = !this.open;
     },
-    classObject(index) {
+    classObject(index, col) {
       for (let i = 0, len = this.addedRules.length; i < len; i += 1) {
-        if (this.addedRules[i].column === index) {
+        if ((this.addedRules[i].column === index) && col) {
           return {
             backgroundColor: this.addedRules[i].formatting.backgroundColor,
-            padding: '12px',
           };
         }
       }
