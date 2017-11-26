@@ -47,7 +47,10 @@ export default {
       rules: [
         {
           id: 1,
-          regex: 'string',
+          regex: '',
+          numberCriteria: {
+            lessThanOrEqualTo: 22,
+          },
           column: 2,
           formatting: {
             backgroundColor: '#fc0',
@@ -55,7 +58,10 @@ export default {
         },
         {
           id: 2,
-          regex: 'string',
+          regex: '',
+          numberCriteria: {
+            greaterThan: 30,
+          },
           column: 1,
           formatting: {
             backgroundColor: '#fcc',

@@ -43,13 +43,40 @@ export default {
     },
     classObject(index, col) {
       for (let i = 0, len = this.rules.length; i < len; i += 1) {
-        if ((this.rules[i].column === index) && col) {
-          return {
-            backgroundColor: this.rules[i].formatting.backgroundColor,
-          };
+        if ((this.rules[i].column === index)) {
+          // console.log('validation result', this.validate(this.rules[i], col));
+          if (this.validate(this.rules[i], col)) {
+            return {
+              backgroundColor: this.rules[i].formatting.backgroundColor,
+            };
+          }
         }
       }
       return {};
+    },
+    validate(rule, value) {
+      // if (rule.regex && rule.regex.length) {
+      //   return true;
+      // }
+
+      const condition = Object.keys(rule.numberCriteria)[0];
+      const number = rule.numberCriteria[condition];
+
+      // console.log('testing ', value, ' condition and number', condition, number);
+
+      switch (condition) {
+        case 'greaterThan': return (value > number);
+
+        case 'lessThan': return (value < number);
+
+        case 'equalTo': return (value === number);
+
+        case 'greaterThanOrEqualTo': return (value >= number);
+
+        case 'lessThanOrEqualTo': return (value <= number);
+
+        default: return false;
+      }
     },
   },
 };

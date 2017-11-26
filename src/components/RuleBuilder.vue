@@ -1,7 +1,6 @@
 <template>
   <div>
-    Rule Builder
-    {{ rules }}
+    Rule Builder {{ rules }}
     <div class="card" v-for="(rule, index) in rules" :key="rule.id">
       <div class="card-body">
         #{{ index+1 }} <b>{{ columns[rule.column] }}</b>
@@ -15,10 +14,21 @@
         <div class="alert alert-danger" role="alert" v-if="formError">
           {{ formError }}
         </div>
-        <label>
+        <!-- <label>
           Regex
           <input class="form-control" type="text" v-model="rule.regex">
-        </label>
+        </label> -->
+        <label>
+          Number Criteria
+          <select class="form-control" v-model="numberCriteria">
+            <option value="greaterThan">Greater than</option>
+            <option value="lessThan">Less than</option>
+            <option value="equalTo">Equal to</option>
+            <option value="greaterThanOrEqualTo">Greater than or equal to</option>
+            <option value="lessThanOrEqualTo">Less than or equal to</option>
+          </select>
+          <input type="number" class="form-control" v-model="number"/>
+        </label><br/>
         <label>
           Column
           <select v-model="rule.column" class="form-control">
@@ -52,20 +62,24 @@ export default {
         },
       },
       formError: '',
+      numberCriteria: 'greaterThan',
+      number: '',
     };
   },
   methods: {
     addRule() {
-      const { regex, column, formatting } = this.rule;
-      if ((regex && regex.length > 0) &&
+      const { column, formatting } = this.rule;
+      const numberCriteria = this.numberCriteria;
+      const number = this.number;
+
+      if ((numberCriteria && number !== '') &&
       (column >= 0) &&
       (formatting.backgroundColor && formatting.backgroundColor.length > 0)) {
         this.formError = '';
-        this.$emit('addRule', {
-          regex,
-          column,
-          formatting,
-        });
+        const ruleToBeAdded = { column, formatting };
+        ruleToBeAdded.numberCriteria = {};
+        ruleToBeAdded.numberCriteria[numberCriteria] = number;
+        this.$emit('addRule', ruleToBeAdded);
         this.rule = {
           regex: '',
           column: '',
