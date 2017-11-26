@@ -47,7 +47,6 @@ export default {
       rules: [
         {
           id: 1,
-          regex: '',
           numberCriteria: {
             lessThanOrEqualTo: 22,
           },
@@ -58,7 +57,6 @@ export default {
         },
         {
           id: 2,
-          regex: '',
           numberCriteria: {
             greaterThan: 30,
           },

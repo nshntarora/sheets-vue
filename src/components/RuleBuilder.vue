@@ -14,11 +14,12 @@
         <div class="alert alert-danger" role="alert" v-if="formError">
           {{ formError }}
         </div>
-        <!-- <label>
+        <button class="btn btn-secondary float-right" @click.prevent.stop="toggleRule">Toggle Regex</button>
+        <label v-if="regexRule">
           Regex
-          <input class="form-control" type="text" v-model="rule.regex">
-        </label> -->
-        <label>
+          <input class="form-control" type="text" v-model="regex">
+        </label>
+        <label v-else>
           Number Criteria
           <select class="form-control" v-model="numberCriteria">
             <option value="greaterThan">Greater than</option>
@@ -39,7 +40,7 @@
           Background Color
           <input type="text" v-model="rule.formatting.backgroundColor" class="form-control">
         </label>
-        <a href="#" class="btn btn-primary" @click.prevent.stop="addRule">Create Rule</a>
+        <a href="#" class="btn btn-primary" @click.prevent.stop="createRule">Create Rule</a>
       </div>
     </div>
   </div>
@@ -55,31 +56,68 @@ export default {
   data() {
     return {
       rule: {
-        regex: '',
         column: '',
         formatting: {
           backgroundColor: '',
         },
       },
+      regex: '',
+      regexRule: false,
       formError: '',
       numberCriteria: 'greaterThan',
       number: '',
     };
   },
   methods: {
-    addRule() {
-      const { column, formatting } = this.rule;
-      const numberCriteria = this.numberCriteria;
-      const number = this.number;
+    toggleRule() {
+      this.regexRule = !this.regexRule;
+    },
+    showIncompleteError() {
+      this.formError = 'I guess you missed something';
+    },
+    hideIncompleteError() {
+      this.formError = '';
+    },
+    createRule() {
+      if (this.regexRule) {
+        this.createRegexRule();
+      } else {
+        this.createNumberRule();
+      }
+    },
+    createRegexRule() {
+      if (this.regex && this.regex.length) {
+        const regex = new RegExp(this.regex);
+        this.addRule({ regex });
+      } else {
+        this.showIncompleteError();
+      }
+    },
+    createNumberRule() {
+      if (this.numberCriteria && this.number !== '') {
+        const numberCriteria = this.numberCriteria;
 
-      if ((numberCriteria && number !== '') &&
-      (column >= 0) &&
-      (formatting.backgroundColor && formatting.backgroundColor.length > 0)) {
-        this.formError = '';
-        const ruleToBeAdded = { column, formatting };
-        ruleToBeAdded.numberCriteria = {};
-        ruleToBeAdded.numberCriteria[numberCriteria] = number;
-        this.$emit('addRule', ruleToBeAdded);
+        let number;
+        if (typeof this.number === 'string') {
+          number = parseInt(this.number, 10);
+        } else {
+          number = this.number;
+        }
+
+        const rule = {};
+        rule.numberCriteria = {};
+        rule.numberCriteria[numberCriteria] = number;
+        this.addRule(rule);
+      } else {
+        this.showIncompleteError();
+      }
+    },
+    addRule(ruleWithCriteria) {
+      const rule = Object.assign(ruleWithCriteria, this.rule);
+      if ((rule.column >= 0) &&
+      (rule.formatting.backgroundColor && rule.formatting.backgroundColor.length > 0)) {
+        this.hideIncompleteError();
+        this.$emit('addRule', rule);
         this.rule = {
           regex: '',
           column: '',
@@ -88,7 +126,7 @@ export default {
           },
         };
       } else {
-        this.formError = 'I guess you missed something';
+        this.showIncompleteError();
       }
     },
   },

@@ -43,6 +43,7 @@ export default {
     },
     classObject(index, col) {
       for (let i = 0, len = this.rules.length; i < len; i += 1) {
+        // console.log('testing rule ', i);
         if ((this.rules[i].column === index)) {
           // console.log('validation result', this.validate(this.rules[i], col));
           if (this.validate(this.rules[i], col)) {
@@ -55,10 +56,9 @@ export default {
       return {};
     },
     validate(rule, value) {
-      // if (rule.regex && rule.regex.length) {
-      //   return true;
-      // }
-
+      if (rule.regex) {
+        return rule.regex.test(value);
+      }
       const condition = Object.keys(rule.numberCriteria)[0];
       const number = rule.numberCriteria[condition];
 
