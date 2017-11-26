@@ -113,9 +113,12 @@ export default {
       }
     },
     addRule(ruleWithCriteria) {
-      const rule = Object.assign(ruleWithCriteria, this.rule);
-      if ((rule.column >= 0) &&
-      (rule.formatting.backgroundColor && rule.formatting.backgroundColor.length > 0)) {
+      if ((this.rule.column >= 0) &&
+      (this.rule.formatting.backgroundColor && this.rule.formatting.backgroundColor.length > 0)) {
+        if (this.rule.formatting.backgroundColor[0] !== '#') {
+          this.rule.formatting.backgroundColor = `#${this.rule.formatting.backgroundColor}`;
+        }
+        const rule = Object.assign(ruleWithCriteria, this.rule);
         this.hideIncompleteError();
         this.$emit('addRule', rule);
         this.rule = {
