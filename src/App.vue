@@ -29,17 +29,17 @@ export default {
         headings: ['Name', 'Roll Number', 'Marks'],
         rows: [
           {
-            data: ['Shivam', 123, 22],
+            data: ['Nishant', 22, 33],
           },
           {
-            data: ['Arora', 123, 22],
+            data: ['Rohan', 31, 58],
             children: [
-              { data: ['Nishant', 1417424, 59] },
+              { data: ['Arun', 10, 70] },
               {
-                data: ['Arora', 1417425, 69],
+                data: ['Ankur', 7, 74],
                 children: [
                   {
-                    data: ['Shivam', 123, 22],
+                    data: ['Shivam', 40, 20],
                   },
                 ],
               },
@@ -51,19 +51,17 @@ export default {
         {
           id: 1,
           numberCriteria: {
-            lessThanOrEqualTo: 22,
+            lessThanOrEqualTo: 40,
           },
           column: 2,
           formatting: {
-            backgroundColor: '#fc0',
+            backgroundColor: '#f00',
           },
         },
         {
           id: 2,
-          numberCriteria: {
-            greaterThan: 30,
-          },
-          column: 1,
+          regex: new RegExp('N'),
+          column: 0,
           formatting: {
             backgroundColor: '#fcc',
           },
