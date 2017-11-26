@@ -1,8 +1,9 @@
 <template>
   <div>
-    Rule Builder {{ rules }}
+    Rule Builder
     <div class="card" v-for="(rule, index) in rules" :key="rule.id">
       <div class="card-body">
+        <i class="fa fa-trash float-right pointer" @click.prevent.stop="deleteRule(rule.id)"></i>
         #{{ index+1 }} <b>{{ columns[rule.column] }}</b>
       </div>
     </div>
@@ -131,6 +132,9 @@ export default {
       } else {
         this.showIncompleteError();
       }
+    },
+    deleteRule(ruleId) {
+      this.$emit('deleteRule', ruleId);
     },
   },
 };

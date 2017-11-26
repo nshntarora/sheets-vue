@@ -5,7 +5,7 @@
         <display-table :table="table" :rules="rules"/>
       </div>
       <div class="col-sm-12 col-md-4">
-        <rule-builder :rules="rules" :columns="table.headings" @addRule="addRule"/>
+        <rule-builder :rules="rules" :columns="table.headings" @addRule="addRule" @deleteRule="deleteRule"/>
       </div>
     </div>
   </div>
@@ -75,6 +75,11 @@ export default {
   methods: {
     addRule(rule) {
       this.rules.push(Object.assign({ id: this.rules.length + 1 }, rule));
+    },
+    deleteRule(ruleId) {
+      const rule = this.rules.find(r => r.id === ruleId);
+      const index = this.rules.indexOf(rule);
+      this.rules.splice(index, 1);
     },
   },
 };

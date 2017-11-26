@@ -78,7 +78,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .fa {
   border: 1px solid #ccc;
   padding: 1px;
